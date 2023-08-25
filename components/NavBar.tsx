@@ -1,10 +1,22 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
+import {signIn,signOut,useSession,getProviders} from 'next-auth/react'
 import Link from 'next/link'
 import Image from 'next/image'
 
 const NavBar = () => {
   const [open,setOpen]=useState<boolean>(false)
+  const {data:session} = useSession()
+  const [authProviders, setAuthProviders]= useState<any>(null)
+  useEffect(()=>{
+    const setProviders = async()=>{
+      const response = await getProviders()
+      console.log(response)
+      setAuthProviders(response)
+    }
+    setProviders()
+  },[])
+  useEffect(()=>console.log(authProviders),[])
   return (
     <>
     
@@ -27,7 +39,27 @@ const NavBar = () => {
               onMouseEnter={()=>setOpen(prev=>!prev)}
             />
           </div>
-
+          <div className='flex items-center justify-between  gap-x-2 px-5 navbar-box'>
+            {session?.user
+              ?<button className='auth-btn'>Logout</button>
+              :<>
+                {authProviders && Object.values(authProviders).map((prov:any)=>{
+                  console.log(prov)
+                  return (
+                  <button 
+                    className='auth-btn'
+                    key={prov.name}
+                    onClick={()=>{
+                      console.log(prov)
+                      signIn(prov.id)}}
+                  >
+                    Login
+                  </button>)
+                })}
+              </>
+            }
+            
+          </div>
         </div>
     </nav>
       {/*MENU DROPDOWN ABSOLUTE POSITION */}
