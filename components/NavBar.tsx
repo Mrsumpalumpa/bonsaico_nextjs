@@ -1,31 +1,31 @@
 'use client'
-import React, { useState,useEffect } from 'react'
-import {signIn,signOut,useSession,getProviders} from 'next-auth/react'
+import React, { useState,useEffect,useContext } from 'react'
+import {signIn,signOut,useSession,getProviders,SessionContext} from 'next-auth/react'
 import Link from 'next/link'
 import Image from 'next/image'
 
 const NavBar = () => {
+  const sessionCtx = useContext(SessionContext) as any
   const [open,setOpen]=useState<boolean>(false)
   const {data:session} = useSession()
   const [authProviders, setAuthProviders]= useState<any>(null)
   useEffect(()=>{
     const setProviders = async()=>{
       const response = await getProviders()
-      console.log(response)
       setAuthProviders(response)
     }
     setProviders()
   },[])
-  useEffect(()=>console.log(authProviders),[])
+  useEffect(()=>console.log("CONTEXT:",sessionCtx.data),[session,authProviders])
   return (
     <>
     
     <nav className='navbar-custom'>
-        <div className='flex items-center justify-between  gap-x-2 px-5 navbar-box '>
+        <div className='flex items-center justify-between  gap-x-2 px-5 navbar-box'>
           <Image alt='logo' src={'/logocolor.svg'} width={60} height={30} className='py-1'/>
           <h1 style={{fontWeight:700}} className='gradient-text hidden md:block'>Friends&Klench</h1>
         </div>
-        <div className='flex items-center justify-end' style={{minWidth:'290px', width:'100%'}} >
+        <div className='flex items-center justify-end' style={{minWidth:'fit-content', width:'100%'}} >
           <div className='flex items-center justify-between  gap-x-2 px-5 navbar-box'>
             <Image 
               alt='menu' 
@@ -40,20 +40,38 @@ const NavBar = () => {
             />
           </div>
           <div className='flex items-center justify-between  gap-x-2 px-5 navbar-box'>
-            {session?.user
-              ?<button className='auth-btn'>Logout</button>
+            {session && session?.user
+              ?
+              <>
+                {authProviders && Object.values(authProviders).map((prov:any)=>{
+                  return (
+                    <>
+                      <img 
+                        alt='userprofileimg'
+                        src={session.user?.image as string}
+                        width={40}
+                        height={40}
+                        key={prov.name}
+                        onClick={()=>{signOut(prov.id)}}
+                      />
+                      <span>Sign out</span>
+                    </>
+              
+                  )
+                })}
+                
+              </>
               :<>
                 {authProviders && Object.values(authProviders).map((prov:any)=>{
-                  console.log(prov)
                   return (
                   <button 
                     className='auth-btn'
                     key={prov.name}
                     onClick={()=>{
-                      console.log(prov)
-                      signIn(prov.id)}}
+                      signIn(prov.id)
+                    }}
                   >
-                    Login
+                    {`Sign in with ${prov.name}`}
                   </button>)
                 })}
               </>
