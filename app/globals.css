@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  min-height: 100vh;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  color: rgb(var(--foreground-rgb));
+  
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+.navbar-custom{
+  display: flex;
+  padding-inline: .5em;
+  width: 100%;
+  background: linear-gradient(to right, #645f5f 0%, rgb(46, 38, 38) 100%);
+}
+.navbar-box{
+  display:flex;
+  justify-items: center;
+  min-width: fit-content;
+}
+
+.gradient-text {
+  font-weight: 900;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  background-image: linear-gradient(45deg, #f3ec78, #af6e42);
+}
+.dropdown-menu{
+  background: linear-gradient(to right, #645f5f 0%, rgb(46, 38, 38) 100%);
+  position: absolute;
+  top: 75px;
+  right: 0;
+  padding-block: 10px;
+  width: 290px;
+}
+.dropdown-iconimg{
+  background: transparent;
+  padding:2px
+}
+.dropdown-iconimg:hover{
+  border-radius: 50%;
+  background:linear-gradient(45deg, #f3ed7877, #af6e4283);
+  box-shadow: 2px 2px 3px #f3ed78d5,;
+}
+.dropdown-item{
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+.dropdown-item:hover{
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  background-image: linear-gradient(45deg, #f3ec78, #af6e42);
+}
+.auth-btn{
+  background: linear-gradient(45deg, #f3ec78, #af6e42);
+  padding-block: 3px;
+  padding-inline: 5px;
+  border-radius: 5px;
+  color: #333333;
+  font-weight: 700;
+}
