@@ -3,6 +3,9 @@ import React, { useState,useEffect,useContext } from 'react'
 import {signIn,signOut,useSession,getProviders,SessionContext} from 'next-auth/react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Black_Ops_One} from 'next/font/google'
+
+const blackops = Black_Ops_One({weight:'400',subsets:["latin"]})
 
 const NavBar = () => {
   const sessionCtx = useContext(SessionContext) as any
@@ -16,17 +19,18 @@ const NavBar = () => {
     }
     setProviders()
   },[])
-  useEffect(()=>console.log("CONTEXT:",sessionCtx.data),[session,authProviders])
+  useEffect(()=>console.log("CONTEXT:",sessionCtx.data,),[authProviders])
+  useEffect(()=>{console.log("SESSION: -->" ,session)},[session])
   return (
     <>
     
     <nav className='navbar-custom'>
         <div className='flex items-center justify-between  gap-x-2 px-5 navbar-box'>
-          <Image alt='logo' src={'/logocolor.svg'} width={60} height={30} className='py-1'/>
-          <h1 style={{fontWeight:700}} className='gradient-text hidden md:block'>Friends&Klench</h1>
+          <Image alt='logo' src={'/logocolor.png'} width={60} height={30} className='py-1'/>
+          <h1 style={{fontSize:'20px'}} className={`${blackops.className} gradient-text hidden md:block`}>BURI&KLENCH</h1>
         </div>
         <div className='flex items-center justify-end' style={{minWidth:'fit-content', width:'100%'}} >
-          <div className='flex items-center justify-between  gap-x-2 px-5 navbar-box'>
+          <div className='flex items-center justify-between navbar-box'>
             <Image 
               alt='menu' 
               src={'/menu.svg'} 
@@ -45,17 +49,17 @@ const NavBar = () => {
               <>
                 {authProviders && Object.values(authProviders).map((prov:any)=>{
                   return (
-                    <>
+                    <div key={prov.id} className='button-box' onClick={()=>{signOut(prov.id)}}>
+                      <span style={{paddingInline:'5px'}} className='auth-btn'>Sign out</span>
                       <img 
                         alt='userprofileimg'
                         src={session.user?.image as string}
                         width={40}
                         height={40}
                         key={prov.name}
-                        onClick={()=>{signOut(prov.id)}}
+                        className="logout-image"
                       />
-                      <span>Sign out</span>
-                    </>
+                    </div>
               
                   )
                 })}
@@ -79,12 +83,12 @@ const NavBar = () => {
             
           </div>
         </div>
-    </nav>
+      </nav>
       {/*MENU DROPDOWN ABSOLUTE POSITION */}
       <div 
-        className='dropdown-menu px-5' 
-        style={{display:open?"block":"none" }}
-        onMouseLeave={()=>setOpen(prev=>!prev)}
+          className='dropdown-menu px-5' 
+          style={{display:open?"block":"none" }}
+          onMouseLeave={()=>setOpen(prev=>!prev)}
       >
             <div className='flex items-center gap-x-2 py-1'>
               
@@ -104,11 +108,11 @@ const NavBar = () => {
 
               <Link 
                 className='dropdown-item' 
-                href={'/products'} 
+                href={'/blog'} 
                 style={{color:'white'}} 
               >
-                <Image className='dropdown-iconimg' alt='productslist' src={'/productslist.svg'} width={20} height={20} />
-                Products
+                <Image className='dropdown-iconimg' alt='blog' src={'/productslist.svg'} width={20} height={20} />
+                Blog
               </Link>
             </div>
             <div className='flex items-center gap-x-2 py-1'>

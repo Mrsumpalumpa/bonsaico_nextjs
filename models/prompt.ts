@@ -1,13 +1,18 @@
 import { Schema, model, models } from 'mongoose';
 
-const PromptSchema = new Schema({
+interface IPrompt {
+    creator: Schema.Types.ObjectId;
+    message: string;
+    tag: string;
+}
+const PromptSchema = new Schema<IPrompt>({
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  prompt: {
+  message: {
     type: String,
-    required: [true, 'Prompt is required.'],
+    required: [true, 'Message is required.'],
   },
   tag: {
     type: String,
