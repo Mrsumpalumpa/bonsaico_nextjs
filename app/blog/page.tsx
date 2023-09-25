@@ -24,7 +24,7 @@ const blogPage = () => {
     .then((r:any[])=>setPrompts(r))
   },[])
   return (
-    <section className="w-full">
+    <section className="w-full" id="blogContainer" >
       <div 
         style={{
           marginBlock:'10px',

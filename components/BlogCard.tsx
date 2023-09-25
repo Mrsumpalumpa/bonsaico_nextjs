@@ -14,7 +14,7 @@ const BlogCard = (props:IProps) => {
             <p>{props.tag}</p>
         </div>
         <div
-            className='card-content'
+            className='card-content text-white'
         >
             {props.message}
         </div>
