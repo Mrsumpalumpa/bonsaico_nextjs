@@ -8,8 +8,8 @@ import { Special_Elite } from 'next/font/google'
 const spe = Special_Elite({weight:'400',subsets:["latin"]})
 
 export const metadata: Metadata = {
-  title: 'BonsaiCo',
-  description: 'Bonsai eCommerce',
+  title: 'Friends n Klench',
+  description: 'Troll it baby hard. HAZ MUCHOS FRIENDS Y DAME TU DINELO',
 }
 
 export default function RootLayout({
