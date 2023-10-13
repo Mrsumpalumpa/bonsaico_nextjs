@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET(request:NextApiRequest){
+export async function GET(request:NextRequest){
     const output = [
         {id:1,productName:'Bonsai black Pine',category:'conifer'},
         {id:2,productName:'Bonsai Peach',category:'caduceous'},
@@ -8,5 +8,5 @@ export async function GET(request:NextApiRequest){
         {id:4,productName:'Bonsai Lemon',category:'citrus'},
         {id:5,productName:'Bonsai Oak',category:'caduceous'},
     ]
-    return new Response(JSON.stringify(output))
+    return new NextResponse(JSON.stringify(output))
 }   

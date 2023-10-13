@@ -12,10 +12,10 @@ const Home = () => {
           </h1>
           <article className='mx-auto w-2/3 flex-column gradient-text '>
             <h3 className='px-2 text-center text-xl md:text-3xl'>TROLL THE WORLD</h3>
-            <p className='px-2 text-md'>Your favourite troll website to buy NFT NKYC/KYC (we don't give a ****) NFS JFK KFC que te foca la vaca impresionantemente.<br/></p>
-            <p className='px-2 text-md'>Compra ****** sin sentido con muchísimo dinelo y envíame tus Bitcoins a esta dirección:<br/>
-            bc1qrcvsq8xg73z4w3ucfqljtmgmf6xpdhtzds4v2atwky0ejsmfe79qc8usws<br/>
+            <p className='px-2 text-md'>Compra ****** sin sentido con muchísimo dinelo y envíame tus Bitcoins a esta dirección:
+            
             </p>
+            <p className='px-2 text-md'>c1qrcvsq8xg73z4w3ucfqljtmgmf6xpdhtzds4v2atwky0ejsmfe79qc8uswss</p>b
             <p className='px-2'><small>PD: Haz como que te caes and touch my tralala</small></p>
           </article>
           <article className='mx-auto w-2/3 my-5 flex px-2 justify-between'>

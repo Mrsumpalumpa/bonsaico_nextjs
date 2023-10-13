@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
 
 const output = [
     {id:1,productName:'Bonsai black Pine',category:'conifer'},
@@ -8,7 +8,7 @@ const output = [
     {id:5,productName:'Bonsai Oak',category:'caduceous'},
 ]
 
-export async function GET(request:NextApiRequest,response:NextApiResponse){
+export async function GET(request:NextRequest,response:NextResponse){
     const prodId = request.url?.split('/')[5] ?request.url?.split('/')[5] :"0"
-    return new Response(JSON.stringify(output.filter((el)=>el.id===(parseInt(prodId)))))
+    return new NextResponse(JSON.stringify(output.filter((el)=>el.id===(parseInt(prodId)))))
 }   

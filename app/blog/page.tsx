@@ -4,20 +4,20 @@ import { useEffect,useState } from "react"
 import BlogCard from "@/components/BlogCard"
 import Link from "next/link"
 
-const loadPrompts = async ()=>{
-  const output = await fetch('/api/blog',{cache:'no-store'})
-          .then(res=>{
-            console.log("blog res",res)
-            return res.json()
-          })
-          .catch(err=>{
-            
-            return err
-          })
-  return output
-}
-const blogPage = () => {
-//  const promptData = loadPrompts()
+const BlogPage = () => {
+  const loadPrompts = async ()=>{
+    const output = await fetch('/api/blog',{cache:'no-store'})
+            .then(res=>{
+              console.log("blog res",res)
+              return res.json()
+            })
+            .catch(err=>{
+              
+              return err
+            })
+    return output
+  }
+  //  const promptData = loadPrompts()
   const [prompts,setPrompts]= useState<any[]>([])
   useEffect( ()=>{
     loadPrompts()
@@ -60,4 +60,4 @@ const blogPage = () => {
   )
 }
 
-export default blogPage
+export default BlogPage
