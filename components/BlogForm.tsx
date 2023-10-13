@@ -57,11 +57,10 @@ const BlogForm = () => {
           
           }}
         >
-
           <label 
             htmlFor='post'
             style={{
-              width:'10%',textAlign:'start'
+              width:'10%',textAlign:'start',color:'white'
             }} 
           >
             Message
@@ -99,7 +98,8 @@ const BlogForm = () => {
           <label htmlFor='post'
             style={{
               width:'10%',
-              textAlign:'start'
+              textAlign:'start',
+              color:'white'
             }} 
           >Tag</label>
           <input 

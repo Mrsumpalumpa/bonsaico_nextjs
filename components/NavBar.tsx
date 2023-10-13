@@ -4,6 +4,9 @@ import {signIn,signOut,useSession,getProviders,SessionContext} from 'next-auth/r
 import Link from 'next/link'
 import Image from 'next/image'
 import { Black_Ops_One} from 'next/font/google'
+import CubeComponent from './CubeComponent';
+import TorusComponent from './TorusComponent'
+import PolihedronComponent from './PolihedronComponent'
 
 const blackops = Black_Ops_One({weight:'400',subsets:["latin"]})
 
@@ -25,9 +28,11 @@ const NavBar = () => {
     <>
     
     <nav className='navbar-custom'>
-        <div className='flex items-center justify-between  gap-x-2 px-5 navbar-box'>
-          <Image alt='logo' src={'/logocolor.png'} width={60} height={30} className='py-1'/>
-          <h1 style={{fontSize:'20px'}} className={`${blackops.className} gradient-text hidden md:block`}>BURI&KLENCH</h1>
+        <div className='flex flex-nowrap items-center justify-between  gap-x-2 px-5 navbar-box'>
+          {/*<CubeComponent/>*/}
+          <TorusComponent/>
+          {/*<PolihedronComponent/>*/}
+          <h1 style={{fontSize:'20px'}} className={`${blackops.className} gradient-text hidden md:block`}>FRIENDS&KLENCH</h1>
         </div>
         <div className='flex items-center justify-end' style={{minWidth:'fit-content', width:'100%'}} >
           <div className='flex items-center justify-between navbar-box'>
@@ -49,8 +54,8 @@ const NavBar = () => {
               <>
                 {authProviders && Object.values(authProviders).map((prov:any)=>{
                   return (
-                    <div key={prov.id} className='button-box' onClick={()=>{signOut(prov.id)}}>
-                      <span style={{paddingInline:'5px'}} className='auth-btn'>Sign out</span>
+                    <div key={prov.id} className='button-box btn-custom' onClick={()=>{signOut(prov.id)}}>
+                      <span >Sign out</span>
                       <img 
                         alt='userprofileimg'
                         src={session.user?.image as string}
@@ -67,16 +72,19 @@ const NavBar = () => {
               </>
               :<>
                 {authProviders && Object.values(authProviders).map((prov:any)=>{
-                  return (
-                  <button 
-                    className='auth-btn'
-                    key={prov.name}
-                    onClick={()=>{
-                      signIn(prov.id)
-                    }}
-                  >
-                    {`Sign in with ${prov.name}`}
-                  </button>)
+                  if(prov.id ==="google"){
+                    return (
+                    <button 
+                      className='bg-transparent'
+                      key={prov.name}
+                      onClick={()=>{
+                        signIn(prov.id)
+                      }}
+                    >
+                      <Image alt='google' src={'/google.png'}  height={30} width={30}/>
+                    </button>)
+
+                  }
                 })}
               </>
             }
